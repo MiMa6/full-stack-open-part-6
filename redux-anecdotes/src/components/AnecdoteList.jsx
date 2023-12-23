@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { increaseVotes } from "../reducers/anecdoteReducer";
+import { setNotification, delNotifiction } from "../reducers/notificationReducer";
 import PropTypes from 'prop-types';
 
 const Anecdote = ({ anecdote, handleClick }) => {
@@ -29,6 +30,10 @@ const AnecdoteList = () => {
   const vote = (id) => {
     console.log('vote', id)
     dispatch(increaseVotes(id))
+    dispatch(setNotification(`You voted '${anecdotes.find(anecdote => anecdote.id === id).content}'`))
+    setTimeout(() => {
+      dispatch(delNotifiction(''))
+    }, 5000)
   }
   return (
     <div>
