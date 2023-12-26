@@ -28,8 +28,8 @@ const AnecdoteList = () => {
   const anecdotesOrdered = anecdotesFiltered.sort((a, b) => b.votes - a.votes)
 
   const vote = (id) => {
-    console.log('vote', id)
-    dispatch(increaseVotes(id))
+    const anecdoteToChange = anecdotes.find(a => a.id === id)
+    dispatch(increaseVotes(id, anecdoteToChange))
     dispatch(setNotification(`You voted '${anecdotes.find(anecdote => anecdote.id === id).content}'`))
     setTimeout(() => {
       dispatch(delNotifiction(''))
